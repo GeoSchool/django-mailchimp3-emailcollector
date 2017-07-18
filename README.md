@@ -18,3 +18,11 @@ added = mc.add_member_to_list(settings.MAILCHIMP_LIST_ID, email)
 if added:
     print("Email successfully added")
 ```
+
+## Running tests
+
+```bash
+virtualenv --python=python3 env
+pip install -r requirements-test.txt
+python tests.py
+```

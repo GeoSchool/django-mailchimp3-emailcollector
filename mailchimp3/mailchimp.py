@@ -28,7 +28,6 @@ class Mailchimp(object):
             'status': status,
         }
         response = self._post_api('lists/' + list_id + '/members', json)
-        logging.info(response.json()['detail'])
         return response.status_code == 200
 
     def _post_api(self, endpoint, json):
@@ -38,6 +37,7 @@ class Mailchimp(object):
             json=json,
             auth=('mailchimp3lib', self.api_key),
         )
-        logging.debug("Got response {} for {}".format(
-            response.status_code, endpoint))
+        logging.debug(
+            "Got response {} for {}".format(response.status_code, endpoint)
+        )
         return response
