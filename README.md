@@ -33,7 +33,6 @@ python tests.py
 You can also run the coverage:
 
 ```bash
-pip install coverage
 coverage run tests.py
 # Display the results
 coverage report -m

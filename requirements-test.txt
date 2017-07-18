@@ -1,3 +1,4 @@
 Django>=1.11
 requests
 requests_mock
+coverage

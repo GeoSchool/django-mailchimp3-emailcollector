@@ -19,7 +19,7 @@ if __name__ == '__main__':
     django.setup()
 
     from django.test.runner import DiscoverRunner
-    test_runner = DiscoverRunner(verbosity=1)
+    test_runner = DiscoverRunner(verbosity=2)
 
     failures = test_runner.run_tests(['mailchimp3'])
     if failures:
