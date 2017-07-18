@@ -2,15 +2,18 @@ import json
 
 import requests_mock
 from django.test import TestCase
-from mailchimp3 import Mailchimp
+
+from .. import mailchimp
+from .tests_utils import ExtraTestToolsMixin
 
 
-class MailchimpTests(TestCase):
+class MailchimpTests(ExtraTestToolsMixin, TestCase):
     datacenter = "us6"
-    key = "c08ab581ee15d1d9e53fb4e6715e6c2b-" + datacenter
+    key = "c08ab581ee15d1d9e53fb4e6711e6c2b-" + datacenter
 
     def setUp(self):
-        self.mc = Mailchimp(self.key)
+        with self.app_settings(mailchimp, MAILCHIMP_API_KEY=self.key):
+            self.mc = mailchimp.Mailchimp()
         self.fake_endpoint = 'endpoint/to/match'
         self.fake_request = {'hirondelle': 'Test'}
         self.fake_response = {'status': 'Test Succeeded'}

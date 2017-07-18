@@ -7,19 +7,17 @@ import logging
 
 import requests
 
+from . import app_settings
+
 
 class Mailchimp(object):
-    API_URL = "https://{datacenter}.api.mailchimp.com/3.0/"
-
-    def __init__(self, api_key):
-        if len(api_key) < 35 or api_key.find('-') == -1:
-            raise ValueError(
-                "Mailchimp Api Key should be at least 35 characters"
-                " and contain a dash."
-            )
-        self.api_key = api_key
-        datacenter = api_key[api_key.find('-') + 1:]
-        self.api_url = self.API_URL.format(datacenter=datacenter)
+    def __init__(self):
+        # Build the API URL from the API Key
+        self.api_key = app_settings.MAILCHIMP_API_KEY
+        datacenter = self.api_key[self.api_key.find('-') + 1:]
+        self.api_url = app_settings.MAILCHIMP_API_URL.format(
+            datacenter=datacenter
+        )
 
     def add_member_to_list(self, list_id, email_address, status="subscribed"):
         """ Add email_address to the list list_id, setting the given status """
